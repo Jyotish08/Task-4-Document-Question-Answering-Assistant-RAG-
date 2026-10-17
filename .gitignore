@@ -1,0 +1,33 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.playwright-mcp/
+
+# Application storage & user uploads
+storage/*.json
+storage/*.pkl
+storage/*.bin
+!storage/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Streamlit
+.streamlit/
+
+# OS specific
+.DS_Store
+Thumbs.db

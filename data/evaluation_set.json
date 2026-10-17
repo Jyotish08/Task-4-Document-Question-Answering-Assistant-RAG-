@@ -1,0 +1,317 @@
+[
+  {
+    "id": "q01",
+    "category": "answerable",
+    "question": "How many spaces per indentation level are standard in a Python block?",
+    "expected_document": "01_python_syntax_and_types.md",
+    "expected_answer_contains": "4 spaces",
+    "expected_abstain": false,
+    "notes": "Section 1 of 01_python_syntax_and_types.md specifies 4 spaces per indentation level."
+  },
+  {
+    "id": "q02",
+    "category": "answerable",
+    "question": "What exception is raised when mixing tabs and spaces in Python 3?",
+    "expected_document": "01_python_syntax_and_types.md",
+    "expected_answer_contains": "IndentationError",
+    "expected_abstain": false,
+    "notes": "Section 1 of 01_python_syntax_and_types.md specifies IndentationError."
+  },
+  {
+    "id": "q03",
+    "category": "answerable",
+    "question": "Do integers in Python 3 have arbitrary precision?",
+    "expected_document": "01_python_syntax_and_types.md",
+    "expected_answer_contains": "arbitrary precision",
+    "expected_abstain": false,
+    "notes": "Section 3 explains integers in Python 3 have arbitrary precision."
+  },
+  {
+    "id": "q04",
+    "category": "answerable",
+    "question": "What sorting algorithm is used by Python's list.sort() method?",
+    "expected_document": "02_data_structures.md",
+    "expected_answer_contains": "Timsort",
+    "expected_abstain": false,
+    "notes": "Section 1 of 02_data_structures.md explicitly names Timsort."
+  },
+  {
+    "id": "q05",
+    "category": "answerable",
+    "question": "What is the syntax for creating an empty set in Python?",
+    "expected_document": "02_data_structures.md",
+    "expected_answer_contains": "set()",
+    "expected_abstain": false,
+    "notes": "Section 3 explains an empty set must be created with set() because {} creates a dict."
+  },
+  {
+    "id": "q06",
+    "category": "answerable",
+    "question": "What type of objects can be used as dictionary keys in Python?",
+    "expected_document": "02_data_structures.md",
+    "expected_answer_contains": "hashable",
+    "expected_abstain": false,
+    "notes": "Section 4 states dictionary keys must be hashable and immutable."
+  },
+  {
+    "id": "q07",
+    "category": "answerable",
+    "question": "When does the else clause of a Python loop execute?",
+    "expected_document": "03_control_flow_and_functions.md",
+    "expected_answer_contains": "exhaustion",
+    "expected_abstain": false,
+    "notes": "Section 2 explains else executes on condition false or iterable exhaustion, not on break."
+  },
+  {
+    "id": "q08",
+    "category": "answerable",
+    "question": "What happens when a mutable default argument is modified in a function?",
+    "expected_document": "03_control_flow_and_functions.md",
+    "expected_answer_contains": "evaluated once",
+    "expected_abstain": false,
+    "notes": "Section 3 explains default expressions are evaluated once when defined and retain modifications."
+  },
+  {
+    "id": "q09",
+    "category": "answerable",
+    "question": "What do *args and **kwargs collect in function definitions?",
+    "expected_document": "03_control_flow_and_functions.md",
+    "expected_answer_contains": "tuple",
+    "expected_abstain": false,
+    "notes": "Section 3 explains *args collects positional args into a tuple and **kwargs into a dictionary."
+  },
+  {
+    "id": "q10",
+    "category": "answerable",
+    "question": "What is the difference between syntax errors and exceptions in Python?",
+    "expected_document": "04_errors_and_exceptions.md",
+    "expected_answer_contains": "parser",
+    "expected_abstain": false,
+    "notes": "Section 1 distinguishes parser-detected syntax errors from runtime exceptions."
+  },
+  {
+    "id": "q11",
+    "category": "answerable",
+    "question": "Under what circumstances does the finally clause execute in Python?",
+    "expected_document": "04_errors_and_exceptions.md",
+    "expected_answer_contains": "all circumstances",
+    "expected_abstain": false,
+    "notes": "Section 3 states finally executes under all circumstances for clean-up."
+  },
+  {
+    "id": "q12",
+    "category": "answerable",
+    "question": "From which base class should custom user-defined exceptions inherit?",
+    "expected_document": "04_errors_and_exceptions.md",
+    "expected_answer_contains": "Exception",
+    "expected_abstain": false,
+    "notes": "Section 5 emphasizes inheriting from Exception, not BaseException."
+  },
+  {
+    "id": "q13",
+    "category": "answerable",
+    "question": "What global variable holds a module's name as a string?",
+    "expected_document": "05_modules_and_packages.md",
+    "expected_answer_contains": "__name__",
+    "expected_abstain": false,
+    "notes": "Section 1 states __name__ holds the module's name as a string."
+  },
+  {
+    "id": "q14",
+    "category": "answerable",
+    "question": "What is the primary memory management mechanism in CPython?",
+    "expected_document": "06_python_memory_and_execution.pdf",
+    "expected_answer_contains": "reference counting",
+    "expected_abstain": false,
+    "notes": "Page 2 of PDF explains reference counting using ob_refcnt."
+  },
+  {
+    "id": "q15",
+    "category": "answerable",
+    "question": "Why does CPython use the Global Interpreter Lock (GIL)?",
+    "expected_document": "06_python_memory_and_execution.pdf",
+    "expected_answer_contains": "synchronize",
+    "expected_abstain": false,
+    "notes": "Page 2 of PDF explains GIL synchronizes thread execution and protects reference counts."
+  },
+  {
+    "id": "u01",
+    "category": "unsupported",
+    "question": "How do you define a struct in C++20 with designated initializers?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Out of domain C++ query."
+  },
+  {
+    "id": "u02",
+    "category": "unsupported",
+    "question": "What is the capital of Australia?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Geographical general knowledge query."
+  },
+  {
+    "id": "u03",
+    "category": "unsupported",
+    "question": "How does the Rust borrow checker handle non-lexical lifetimes?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Rust language query."
+  },
+  {
+    "id": "u04",
+    "category": "unsupported",
+    "question": "What was the closing stock price of Apple on October 14, 2024?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Financial temporal query."
+  },
+  {
+    "id": "u05",
+    "category": "unsupported",
+    "question": "How do you configure a Kubernetes ingress controller with TLS termination?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "DevOps / Kubernetes query."
+  },
+  {
+    "id": "u06",
+    "category": "unsupported",
+    "question": "What is the recipe for baking sourdough bread?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Baking recipe query."
+  },
+  {
+    "id": "u07",
+    "category": "unsupported",
+    "question": "How do you configure a neural network with PyTorch Lightning?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "PyTorch framework query."
+  },
+  {
+    "id": "u08",
+    "category": "unsupported",
+    "question": "What was the population of Tokyo in the year 2020?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Demographics query."
+  },
+  {
+    "id": "u09",
+    "category": "unsupported",
+    "question": "How do you write a SQL query to calculate moving average in PostgreSQL?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "SQL window functions query."
+  },
+  {
+    "id": "u10",
+    "category": "unsupported",
+    "question": "Who won the FIFA World Cup in 1994?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Sports history query."
+  },
+  {
+    "id": "u11",
+    "category": "unsupported",
+    "question": "How does quantum key distribution prevent eavesdropping with BB84 protocol?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Quantum cryptography query."
+  },
+  {
+    "id": "u12",
+    "category": "unsupported",
+    "question": "What are the rules for castling in competitive chess?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Chess rules query."
+  },
+  {
+    "id": "u13",
+    "category": "unsupported",
+    "question": "How do you implement quicksort in Haskell using list comprehensions?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Haskell functional programming query."
+  },
+  {
+    "id": "u14",
+    "category": "unsupported",
+    "question": "What chemical compounds make up chlorophyll-a?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Biochemistry query."
+  },
+  {
+    "id": "u15",
+    "category": "unsupported",
+    "question": "How do you write an asynchronous HTTP server in Go using goroutines?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Go concurrency query."
+  },
+  {
+    "id": "p01",
+    "category": "partially_supported",
+    "question": "Does Python support complex numbers, and what is the exact formula for quantum spin matrices in Python?",
+    "expected_document": "01_python_syntax_and_types.md",
+    "expected_answer_contains": "complex",
+    "expected_abstain": false,
+    "notes": "Complex numbers real + imag*j is supported, but quantum spin matrices are unsupported."
+  },
+  {
+    "id": "p02",
+    "category": "partially_supported",
+    "question": "How do lists handle memory resizing when using append(), and what is the exact CPU L1 cache line size?",
+    "expected_document": "02_data_structures.md",
+    "expected_answer_contains": "append",
+    "expected_abstain": false,
+    "notes": "list.append in O(1) amortized is supported, but CPU L1 cache line size is unsupported."
+  },
+  {
+    "id": "p03",
+    "category": "partially_supported",
+    "question": "Can custom exceptions inherit from Exception, and how do you send them over a RabbitMQ message bus?",
+    "expected_document": "04_errors_and_exceptions.md",
+    "expected_answer_contains": "Exception",
+    "expected_abstain": false,
+    "notes": "Custom exceptions inheriting from Exception is supported, but RabbitMQ is unsupported."
+  },
+  {
+    "id": "p04",
+    "category": "partially_supported",
+    "question": "How do you activate a virtual environment created with venv in PowerShell on Windows ARM64?",
+    "expected_document": "05_modules_and_packages.md",
+    "expected_answer_contains": "venv",
+    "expected_abstain": false,
+    "notes": "venv module is supported, but specific Windows ARM64 PowerShell command is unsupported."
+  },
+  {
+    "id": "p05",
+    "category": "partially_supported",
+    "question": "Does Python have a garbage collector for reference cycles, and what is the exact garbage collection threshold integer value in PyPy?",
+    "expected_document": "06_python_memory_and_execution.pdf",
+    "expected_answer_contains": "cyclic",
+    "expected_abstain": false,
+    "notes": "CPython cyclic garbage collector is supported, but PyPy integer threshold is unsupported."
+  }
+]
