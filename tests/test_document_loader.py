@@ -8,6 +8,7 @@ from src.document_loader import (
     DocumentLoaderError,
     DocumentPage,
     EmptyDocumentError,
+    EncryptedDocumentError,
     FileSecurityError,
     OcrRequiredError,
     UnsupportedFileTypeError,
@@ -126,3 +127,22 @@ def test_empty_or_scanned_pdf_detects_ocr_required(tmp_path: Path):
     with pytest.raises(OcrRequiredError) as exc_info:
         load_document(pdf_path)
     assert "optical character recognition" in str(exc_info.value).lower()
+
+
+def test_encrypted_pdf_raises_clear_error(tmp_path: Path):
+    """Verify that password-protected PDFs raise EncryptedDocumentError with helpful message."""
+    pdf_path = tmp_path / "protected.pdf"
+    doc = pymupdf.open()
+    p = doc.new_page()
+    p.insert_text((50, 100), "Confidential content.", fontsize=12)
+    doc.save(
+        str(pdf_path),
+        encryption=pymupdf.PDF_ENCRYPT_AES_256,
+        user_pw="password123",
+        owner_pw="password123",
+    )
+    doc.close()
+
+    with pytest.raises(EncryptedDocumentError) as exc_info:
+        load_document(pdf_path)
+    assert "encrypted or password-protected" in str(exc_info.value).lower()

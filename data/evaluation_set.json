@@ -313,5 +313,23 @@
     "expected_answer_contains": "cyclic",
     "expected_abstain": false,
     "notes": "CPython cyclic garbage collector is supported, but PyPy integer threshold is unsupported."
+  },
+  {
+    "id": "q16",
+    "category": "answerable",
+    "question": "Which sorting algorithm is used by Python to sort lists in place?",
+    "expected_document": "02_data_structures.md",
+    "expected_answer_contains": "Timsort",
+    "expected_abstain": false,
+    "notes": "Paraphrased question for list.sort() Timsort implementation."
+  },
+  {
+    "id": "u16",
+    "category": "unsupported",
+    "question": "What is the default TCP socket port for Python list sorting?",
+    "expected_document": null,
+    "expected_answer_contains": "Information not found in provided document.",
+    "expected_abstain": true,
+    "notes": "Same-term distractor: contains Python and list sorting, but asks for absent networking concept."
   }
 ]

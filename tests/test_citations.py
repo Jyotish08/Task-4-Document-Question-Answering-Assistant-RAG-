@@ -43,6 +43,7 @@ def test_create_citation_from_retrieval():
     assert cite.doc_id == "doc_syntax"
     assert cite.source_filename == "syntax.md"
     assert cite.page_number == 1
+    assert cite.passage_text == "A standard Python block uses 4 spaces per indentation level."
     assert "syntax.md, Page 1" in cite.to_formatted_citation()
 
 

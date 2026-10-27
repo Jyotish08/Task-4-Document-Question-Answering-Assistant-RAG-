@@ -76,3 +76,19 @@ def test_chunker_empty_input():
     page = DocumentPage(page_number=1, text="   \n\n   ")
     chunks = chunker.chunk_page("doc_empty", "Empty", "empty.txt", page)
     assert chunks == []
+
+
+def test_chunker_long_sentence_exceeds_chunk_size():
+    """Verify chunker handles a single sentence longer than chunk_size without infinite loops or data loss."""
+    chunker = DocumentChunker(chunk_size=100, chunk_overlap=30)
+    long_sentence = (
+        "This is an unusually long continuous sentence without any terminal punctuation that deliberately "
+        "exceeds the configured chunk size limit in order to verify that the chunking algorithm safely "
+        "processes oversized statements without entering an endless loop."
+    )
+    page = DocumentPage(page_number=1, text=long_sentence)
+    chunks = chunker.chunk_page("doc_long", "Long Doc", "long.txt", page)
+
+    assert len(chunks) >= 1
+    assert chunks[0].char_count >= 100
+    assert "unusually long continuous sentence" in chunks[0].text

@@ -22,6 +22,7 @@ from src.config import config
 from src.document_loader import (
     DocumentLoaderError,
     EmptyDocumentError,
+    EncryptedDocumentError,
     FileSecurityError,
     OcrRequiredError,
     UnsupportedFileTypeError,
@@ -110,6 +111,8 @@ with st.sidebar:
                     success_count += 1
                 except OcrRequiredError as ocr_err:
                     st.error(f"⚠️ OCR Required: {ocr_err}")
+                except EncryptedDocumentError as enc_err:
+                    st.error(f"⚠️ Encrypted Document: {enc_err}")
                 except EmptyDocumentError as empty_err:
                     st.error(f"⚠️ Empty Document: {empty_err}")
                 except UnsupportedFileTypeError as type_err:
@@ -245,6 +248,9 @@ if submitted and question:
                 with st.expander(header_title, expanded=(idx == 1)):
                     st.markdown(f"**Direct Evidence Extract:**")
                     st.info(f"\"{cite.snippet}\"")
+                    if cite.passage_text:
+                        st.markdown(f"**Supporting Source Passage:**")
+                        st.text(cite.passage_text)
                     st.caption(f"**Chunk ID:** `{cite.chunk_id}` | **Document ID:** `{cite.doc_id}` | **Title:** {cite.source_title}")
 
         # Citation Verification Badge

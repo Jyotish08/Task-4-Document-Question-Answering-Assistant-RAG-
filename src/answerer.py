@@ -9,7 +9,13 @@ from enum import Enum
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-from src.abstention import AbstentionEvaluation, AbstentionPolicy, EvidenceStatus
+from src.abstention import (
+    GENERIC_QUESTION_TERMS,
+    AbstentionEvaluation,
+    AbstentionPolicy,
+    EvidenceStatus,
+    simple_stem,
+)
 from src.chunker import split_into_sentences
 from src.citation import Citation, CitationValidator, create_citation_from_retrieval
 from src.config import config
@@ -48,7 +54,8 @@ class GroundedAnswer:
                 section_info = f" (Section: {cite.section})" if cite.section and cite.section != "General" else ""
                 md_lines.append(
                     f"{i}. **{cite.source_filename}**{page_info}{section_info} `[{cite.chunk_id}]`  \n"
-                    f"   *\"{cite.snippet}\"*"
+                    f"   - **Direct Excerpt:** *\"{cite.snippet}\"*  \n"
+                    f"   - **Full Supporting Passage:** *\"{cite.passage_text}\"*"
                 )
 
         return "\n".join(md_lines)
@@ -60,16 +67,35 @@ class GroundedAnswerer:
     def __init__(self, abstention_policy: Optional[AbstentionPolicy] = None):
         self.abstention_policy = abstention_policy or AbstentionPolicy()
 
-    def _score_sentence_relevance(self, sentence: str, query_keywords: Set[str]) -> float:
-        """Score sentence relevance based on keyword match density and length."""
+    def _score_sentence_relevance(
+        self,
+        sentence: str,
+        query_keywords: Set[str],
+    ) -> Tuple[float, Set[str]]:
+        """Score sentence relevance based on core keyword match density and length."""
         if not sentence or not query_keywords:
-            return 0.0
+            return 0.0, set()
         words = set(tokenize(sentence, remove_stopwords=True))
         if not words:
-            return 0.0
-        overlap = words.intersection(query_keywords)
-        # Score is proportional to overlap count and ratio
-        return len(overlap) * 1.5 + (len(overlap) / len(words))
+            return 0.0, set()
+        stems = {simple_stem(w) for w in words}
+
+        core_kw = {w for w in query_keywords if w not in GENERIC_QUESTION_TERMS and len(w) > 2}
+        if not core_kw:
+            core_kw = query_keywords
+
+        core_stems = {simple_stem(w) for w in core_kw}
+        all_query_stems = {simple_stem(w) for w in query_keywords}
+
+        core_overlap = stems.intersection(core_stems)
+        # If there are core keywords in query but this sentence matches none of them, reject!
+        if core_stems and not core_overlap:
+            return 0.0, set()
+
+        all_overlap = stems.intersection(all_query_stems)
+        # Higher weight for core terms, density bonus
+        score = (len(core_overlap) * 3.0) + (len(all_overlap) * 0.5) + (len(all_overlap) / max(len(words), 1))
+        return score, core_overlap
 
     def _extract_best_sentences(
         self,
@@ -77,8 +103,8 @@ class GroundedAnswerer:
         query_keywords: Set[str],
         max_sentences: int = 3,
     ) -> List[Tuple[str, RetrievalResult]]:
-        """Extract top answering sentences along with their parent retrieval results."""
-        scored_sentences: List[Tuple[float, str, RetrievalResult]] = []
+        """Extract top answering sentences strictly grounded in retrieved evidence."""
+        scored_sentences: List[Tuple[float, Set[str], str, RetrievalResult]] = []
 
         for res in retrieval_results:
             sentences = split_into_sentences(res.text)
@@ -87,24 +113,43 @@ class GroundedAnswerer:
                 # Skip pure section headers or ultra-short fragments
                 if len(s_clean) < 25 or s_clean.startswith("#"):
                     continue
-                score = self._score_sentence_relevance(s_clean, query_keywords)
+                score, core_matched = self._score_sentence_relevance(s_clean, query_keywords)
                 if score > 0.0:
-                    scored_sentences.append((score, s_clean, res))
+                    scored_sentences.append((score, core_matched, s_clean, res))
 
         # Sort by sentence relevance score descending
         scored_sentences.sort(key=lambda x: -x[0])
 
-        # Pick top distinct sentences
+        if not scored_sentences:
+            return []
+
+        # Select top distinct sentences with complementary evidence gating
         selected: List[Tuple[str, RetrievalResult]] = []
         seen_texts: Set[str] = set()
 
-        for score, sentence, res in scored_sentences:
+        # Always take the single best sentence
+        best_score, best_stems, best_sentence, best_res = scored_sentences[0]
+        selected.append((best_sentence, best_res))
+        seen_texts.add(best_sentence)
+        covered_stems: Set[str] = set(best_stems)
+
+        # Consider secondary sentences only if they provide complementary core evidence
+        for score, core_matched, sentence, res in scored_sentences[1:]:
             if sentence in seen_texts:
                 continue
-            seen_texts.add(sentence)
-            selected.append((sentence, res))
             if len(selected) >= max_sentences:
                 break
+
+            new_stems = core_matched - covered_stems
+            # Include if it resolves distinct core keywords from query (multi-part question)
+            # or is a contiguous high-scoring sentence from the same top chunk
+            is_complementary = (len(new_stems) > 0 and score >= 0.40 * best_score)
+            is_same_chunk_context = (res.chunk_id == best_res.chunk_id and score >= 0.70 * best_score)
+
+            if is_complementary or is_same_chunk_context:
+                selected.append((sentence, res))
+                seen_texts.add(sentence)
+                covered_stems.update(core_matched)
 
         return selected
 

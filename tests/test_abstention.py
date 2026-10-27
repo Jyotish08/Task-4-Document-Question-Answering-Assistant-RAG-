@@ -96,3 +96,53 @@ def test_supported_query_passes(policy):
     )
     assert eval_res.should_abstain is False
     assert eval_res.status == EvidenceStatus.SUPPORTED
+
+
+def test_same_term_distractor_query_abstains(policy):
+    """Verify query containing common corpus entities but asking for an absent fact strictly abstains."""
+    sample_res = RetrievalResult(
+        chunk_id="c1",
+        doc_id="d1",
+        source_name="syntax.md",
+        page_number=1,
+        section="Syntax",
+        text="A standard Python block uses 4 spaces per indentation level. Python is dynamically typed.",
+        score=0.45,
+        method="hybrid",
+        rank=1,
+    )
+    corpus_text = "A standard Python block uses 4 spaces per indentation level. Python is dynamically typed."
+    eval_res = policy.evaluate(
+        query="What quantum cryptography algorithm is used by Python code blocks?",
+        retrieval_results=[sample_res],
+        method="hybrid",
+        corpus_text=corpus_text,
+    )
+    assert eval_res.should_abstain is True
+    assert eval_res.status == EvidenceStatus.UNSUPPORTED
+    assert eval_res.abstention_message == "Information not found in provided document."
+
+
+def test_high_ranked_irrelevant_passage_does_not_become_answer(policy):
+    """Verify that a high-ranked passage without sufficient evidence does not produce a false positive."""
+    distractor_res = RetrievalResult(
+        chunk_id="c_distractor",
+        doc_id="doc_distractor",
+        source_name="structures.md",
+        page_number=1,
+        section="Lists",
+        text="Python lists are mutable sequences. You can append items using list.append().",
+        score=0.42,
+        method="hybrid",
+        rank=1,
+    )
+    corpus_text = "Python lists are mutable sequences. You can append items using list.append()."
+    eval_res = policy.evaluate(
+        query="What is the default TCP socket port for Python list sorting?",
+        retrieval_results=[distractor_res],
+        method="hybrid",
+        corpus_text=corpus_text,
+    )
+    assert eval_res.should_abstain is True
+    assert eval_res.status == EvidenceStatus.UNSUPPORTED
+    assert eval_res.abstention_message == "Information not found in provided document."

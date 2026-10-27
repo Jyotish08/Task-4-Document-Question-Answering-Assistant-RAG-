@@ -4,7 +4,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Framework: Streamlit](https://img.shields.io/badge/UI-Streamlit-red.svg)](https://streamlit.io/)
-[![Tests: Pytest](https://img.shields.io/badge/Tests-43%20Passed-brightgreen.svg)](tests/)
+[![Tests: Pytest](https://img.shields.io/badge/Tests-51%20Passed-brightgreen.svg)](tests/)
 [![Retrieval: BM25%20%7C%20TF--IDF%20%7C%20Hybrid](https://img.shields.io/badge/Retrieval-Lexical%20Hybrid-orange.svg)](src/retriever.py)
 
 ---
@@ -72,7 +72,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | `.txt` | Multi-encoding reader (`utf-8`, `utf-8-sig`, `latin-1`, `cp1252`) | Single logical page (Page 1) | Strips null bytes, collapses whitespace |
 | `.md` | YAML Frontmatter Parser + Markdown Text Normalizer | Section-aware headings | Parses title, source URL, license from metadata |
-| `.pdf` | PyMuPDF (`pymupdf`) page iterator | 1-indexed physical page numbers | Detects 0-byte or image-only scanned PDFs; raises explicit `OcrRequiredError` |
+| `.pdf` | PyMuPDF (`pymupdf`) page iterator | 1-indexed physical page numbers | Detects 0-byte, image-only scanned PDFs (`OcrRequiredError`), and password-protected files (`EncryptedDocumentError`) |
 
 ### Security & Integrity Guardrails
 1. **Path Traversal Prevention:** `sanitize_filename()` strips `../`, `..\`, null bytes, and absolute paths to isolate file basenames.
@@ -145,7 +145,7 @@ When a user asks a question that cannot be established from the corpus, the assi
 
 ## 8. Quantitative Evaluation Results
 
-Evaluation was executed over `data/evaluation_set.json` (35 manually curated and annotated queries: 15 answerable, 15 unsupported, 5 partially supported).
+Evaluation was executed over `data/evaluation_set.json` (37 manually curated and annotated queries: 16 answerable, 16 unsupported, 5 partially supported, including direct factual, paraphrased, multi-page PDF, same-term entity distractors, and cross-document tests).
 
 | Evaluation Metric | Measured Value | Standard Target | Assessment |
 | :--- | :--- | :--- | :--- |
@@ -157,8 +157,8 @@ Evaluation was executed over `data/evaluation_set.json` (35 manually curated and
 | **Abstention Precision** | **100.0%** | $\ge 95.0\%$ | ✅ Zero False Alarms |
 | **Abstention Recall** | **100.0%** | $\ge 95.0\%$ | ✅ 100% Out-of-Domain Blocked |
 | **False Answer Rate on Unsupported** | **0.0%** | $0.0\%$ | ✅ Zero Hallucinations |
-| **Mean Query Latency** | **4.75 ms** | $< 50.0\text{ ms}$ | ✅ Ultra-Fast Local CPU |
-| **P95 Latency** | **7.75 ms** | $< 100.0\text{ ms}$ | ✅ Ultra-Fast Local CPU |
+| **Mean Query Latency** | **4.90 ms** | $< 50.0\text{ ms}$ | ✅ Ultra-Fast Local CPU |
+| **P95 Latency** | **6.43 ms** | $< 100.0\text{ ms}$ | ✅ Ultra-Fast Local CPU |
 
 *Machine-readable benchmark results are preserved in [`reports/evaluation_results.json`](reports/evaluation_results.json).*
 
@@ -166,28 +166,48 @@ Evaluation was executed over `data/evaluation_set.json` (35 manually curated and
 
 ## 9. Real Query Transcripts
 
-### Example 1: Fully Supported Query
+### Example 1: Fully Supported Query (Direct Markdown Extract)
 - **Question:** `"How many spaces per indentation level are standard in a Python block?"`
 - **Status:** `SUPPORTED`
 - **Answer:**
   > A standard Python block uses 4 spaces per indentation level. `[01_python_syntax_and_types.md, Page 1 (Section: Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001]`
-- **Citation:** `01_python_syntax_and_types.md`, Page 1, Score: `1.0000`
 - **Citation Excerpt:** *"A standard Python block uses 4 spaces per indentation level."*
+- **Supporting Source Passage:**
+  > `"# Python Syntax, Variables, and Primitive Types ## 1. Syntax and Indentation\nPython relies on whitespace indentation rather than curly brackets `{}` or keywords like `begin`/`end` to delimit code blocks. A standard Python block uses 4 spaces per indentation level. Mixing tabs and spaces in Python 3 raises an `IndentationError`. Python statements end at the end of a line, although backslashes `\` or parentheses `()` can be used for explicit or implicit line continuation across multiple lines."`
 
-### Example 2: Unsupported Query (Mandatory Abstention)
+### Example 2: Fully Supported Multi-Page PDF Query (Physical Page Tracking)
+- **Question:** `"What is the primary memory management mechanism in CPython?"`
+- **Status:** `SUPPORTED`
+- **Answer:**
+  > Reference Counting In CPython, the primary memory management mechanism is reference counting. `[06_python_memory_and_execution.pdf, Page 2 (Section: Reference Counting) | Chunk doc_ae15f339caa8_p2_c001]`
+- **Citation:** `06_python_memory_and_execution.pdf`, Page 2, Score: `1.0000`
+- **Citation Excerpt:** *"Reference Counting In CPython, the primary memory management mechanism is reference counting."*
+- **Supporting Source Passage:**
+  > `"Python Memory Management and Garbage Collection\nSource URL: https://docs.python.org/3/c-api/memory.html\nLicense: Python Software Foundation License (PSFL)\n3. Reference Counting\nIn CPython, the primary memory management mechanism is reference counting. Every Python object contains a header field named ob_refcnt that records the number of active references pointing to that object. When an object reference is assigned or passed to a function, its reference count increments."`
+
+### Example 3: Unsupported Out-of-Domain Query (Mandatory Abstention)
 - **Question:** `"What is the capital of Australia?"`
 - **Status:** `UNSUPPORTED`
 - **Answer:**
   > `"Information not found in provided document."`
 - **Diagnostic Reason:** `Query domain concepts (australia, capital) cannot be found in the document corpus.`
 
-### Example 3: Partially Supported Query
+### Example 4: Same-Term Entity Distractor Query (Refusal to Guess)
+- **Question:** `"What is the default TCP socket port for Python list sorting?"`
+- **Status:** `UNSUPPORTED`
+- **Answer:**
+  > `"Information not found in provided document."`
+- **Diagnostic Reason:** `Significant proportion of query concepts (60.0%) are missing from the document corpus.`
+
+### Example 5: Partially Supported Query
 - **Question:** `"Does Python support complex numbers, and what is the exact formula for quantum spin matrices in Python?"`
 - **Status:** `PARTIAL_EVIDENCE`
 - **Answer:**
   > **Complex numbers (`complex`)**: Written in the form `real + imag*j`, where `j` represents the imaginary unit. `[01_python_syntax_and_types.md, Page 1 (Section: 3. Numeric Types) | Chunk doc_00bde289297e_p1_c007]`
 - **Limitation Note:**
-  > *"The provided documents address parts of your question, but specific details regarding 'exact', 'formula', 'matrix', 'quantum', 'spin' could not be established from the retrieved evidence."*
+  > *"The provided documents address parts of your question, but specific details regarding 'exact', 'formula', 'matric', 'quantum', 'spin', 'support' could not be established from the retrieved evidence."*
+- **Supporting Source Passage:**
+  > `"**Floating-point numbers (`float`)**: Represented using standard C double-precision 64-bit IEEE 754 floating-point values. Floating-point division using the `/` operator always returns a `float` (e.g., `7 / 2` evaluates to `3.5`). Integer division (floor division) is performed using the `//` operator (e.g., `7 // 2` evaluates to `3`). 3. **Complex numbers (`complex`)**: Written in the form `real + imag*j`, where `j` represents the imaginary unit. Example: `z = 3 + 4j`."`
 
 ---
 
@@ -248,7 +268,7 @@ python cli.py evaluate
 ```bash
 python -m pytest
 ```
-*Executes all 43 unit and integration tests across ingestion, chunking, retrieval, citations, abstention, security, and evaluation.*
+*Executes all 51 unit and integration tests across ingestion, chunking, retrieval, citations, abstention, security, and evaluation.*
 
 ---
 

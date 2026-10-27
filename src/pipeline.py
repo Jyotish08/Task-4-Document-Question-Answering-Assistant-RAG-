@@ -5,6 +5,7 @@ abstention evaluation, grounded answer synthesis, and citation validation.
 """
 
 from dataclasses import asdict
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
@@ -144,12 +145,36 @@ class DocumentQAPipeline:
             })
         return summary
 
+    def compute_corpus_fingerprint(self) -> str:
+        """Compute a deterministic SHA-256 fingerprint of currently indexed documents."""
+        hasher = hashlib.sha256()
+        for doc_id in sorted(self.documents.keys()):
+            doc = self.documents[doc_id]
+            doc_str = f"{doc.doc_id}:{doc.filename}:{doc.full_text}"
+            hasher.update(doc_str.encode("utf-8", errors="ignore"))
+        return hasher.hexdigest()[:16]
+
+    @staticmethod
+    def compute_directory_fingerprint(dir_path: Path) -> str:
+        """Compute a deterministic hash representing file contents in a directory."""
+        if not dir_path.exists() or not dir_path.is_dir():
+            return ""
+        hasher = hashlib.sha256()
+        allowed = config.ingestion.allowed_extensions
+        for file_path in sorted(dir_path.iterdir()):
+            if file_path.is_file() and file_path.suffix.lower() in allowed:
+                stat = file_path.stat()
+                file_sig = f"{file_path.name}:{stat.st_size}:{int(stat.st_mtime)}"
+                hasher.update(file_sig.encode("utf-8"))
+        return hasher.hexdigest()[:16]
+
     def save_state(self) -> Path:
-        """Serialize current corpus state and chunk metadata to storage."""
+        """Serialize current corpus state, chunk metadata, and fingerprint to storage."""
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         save_file = self.storage_dir / "index_metadata.json"
         serializable_data = {
             "retrieval_method": self.retrieval_method,
+            "corpus_fingerprint": self.compute_corpus_fingerprint(),
             "document_count": len(self.documents),
             "chunk_count": len(self.chunks),
             "documents": [
@@ -203,7 +228,33 @@ class DocumentQAPipeline:
             self.documents = restored_docs
             self.chunks = self.chunker.chunk_documents(list(self.documents.values()))
             self.retriever.index(self.chunks)
+
+            # Invalidate if restored corpus does not match saved fingerprint
+            saved_fp = data.get("corpus_fingerprint")
+            current_fp = self.compute_corpus_fingerprint()
+            if saved_fp and saved_fp != current_fp:
+                print(f"[Warning] Index fingerprint mismatch: saved {saved_fp} != current {current_fp}")
+
             return True
         except Exception as e:
             print(f"[Warning] Failed to restore saved state: {e}")
             return False
+
+    def is_index_fresh(self, dir_path: Path) -> bool:
+        """Check whether the saved index contains all files and exact filenames from dir_path."""
+        if not self.documents:
+            return False
+        if not dir_path.exists() or not dir_path.is_dir():
+            return True
+        allowed = config.ingestion.allowed_extensions
+        dir_files = {p.name for p in dir_path.iterdir() if p.is_file() and p.suffix.lower() in allowed}
+        indexed_files = {d.filename for d in self.documents.values()}
+        return dir_files == indexed_files
+
+    def sync_directory(self, dir_path: Path) -> int:
+        """Synchronize the index with the contents of a directory, rebuilding if stale."""
+        if self.load_state():
+            if self.is_index_fresh(dir_path):
+                return len(self.chunks)
+        # If no saved state or index is stale, re-ingest directory
+        return self.ingest_directory(dir_path)

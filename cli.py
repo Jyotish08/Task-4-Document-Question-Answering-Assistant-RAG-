@@ -14,10 +14,18 @@ from src.pipeline import DocumentQAPipeline
 
 
 def get_pipeline(method: str = "hybrid") -> DocumentQAPipeline:
-    """Initialize pipeline and attempt to restore saved index state."""
+    """Initialize pipeline and attempt to restore saved index state or load sample corpus."""
     pipeline = DocumentQAPipeline(retrieval_method=method)
     if (config.paths.storage_dir / "index_metadata.json").exists():
         pipeline.load_state()
+
+    # If no index exists yet or index is stale relative to sample_docs, sync it
+    if not pipeline.chunks and config.paths.sample_docs_dir.exists():
+        sample_files = list(config.paths.sample_docs_dir.iterdir())
+        if sample_files:
+            print("[Info] Initializing corpus index from sample documents...")
+            pipeline.sync_directory(config.paths.sample_docs_dir)
+
     return pipeline
 
 
@@ -69,10 +77,12 @@ def cmd_query(args: argparse.Namespace) -> None:
         print("Supporting Evidence & Source Citations:")
         for idx, cite in enumerate(answer.citations, start=1):
             page_str = f", Page {cite.page_number}" if cite.page_number else ""
-            section_str = f" (§ {cite.section})" if cite.section and cite.section != "General" else ""
+            section_str = f" (Section: {cite.section})" if cite.section and cite.section != "General" else ""
             print(f"  [{idx}] {cite.source_filename}{page_str}{section_str} [ID: {cite.chunk_id}]")
             print(f"      Score: {cite.score:.4f}")
             print(f"      Excerpt: \"{cite.snippet}\"")
+            if cite.passage_text:
+                print(f"      Supporting Passage: \"{cite.passage_text}\"")
         print("-" * 60)
 
     if not answer.validation_passed:

@@ -1,23 +1,23 @@
 {
   "summary": {
-    "total_queries": 35,
-    "answerable_count": 15,
-    "unsupported_count": 15,
+    "total_queries": 37,
+    "answerable_count": 16,
+    "unsupported_count": 16,
     "partially_supported_count": 5,
     "retrieval_recall_at_1": 1.0,
     "retrieval_recall_at_3": 1.0,
     "retrieval_recall_at_5": 1.0,
     "mean_reciprocal_rank": 1.0,
-    "answer_support_rate": 0.8667,
+    "answer_support_rate": 0.875,
     "citation_correctness_rate": 1.0,
     "abstention_precision": 1.0,
     "abstention_recall": 1.0,
     "false_answer_rate_on_unsupported": 0.0,
-    "latency_mean_ms": 4.75,
-    "latency_median_ms": 4.21,
-    "latency_p95_ms": 7.75,
+    "latency_mean_ms": 4.9,
+    "latency_median_ms": 5.17,
+    "latency_p95_ms": 6.43,
     "retrieval_method": "hybrid",
-    "timestamp": "2026-10-17 16:33:27"
+    "timestamp": "2026-10-27 20:03:58"
   },
   "results": [
     {
@@ -28,7 +28,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "A standard Python block uses 4 spaces per indentation level. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001] Mixing tabs and spaces in Python 3 raises an `IndentationError`. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001] Syntax and Indentation\nPython relies on whitespace indentation rather than curly brackets `{}` or keywords like `begin`/`end` to delimit code blocks. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001]",
+      "actual_answer": "A standard Python block uses 4 spaces per indentation level. [01_python_syntax_and_types.md, Page 1 (Section: Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001]",
       "retrieved_documents": [
         "01_python_syntax_and_types.md",
         "06_python_memory_and_execution.pdf",
@@ -50,7 +50,7 @@
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.96,
+      "latency_ms": 5.71,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -64,7 +64,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Mixing tabs and spaces in Python 3 raises an `IndentationError`. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001] User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (§ 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013] A standard Python block uses 4 spaces per indentation level. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001]",
+      "actual_answer": "Mixing tabs and spaces in Python 3 raises an `IndentationError`. [01_python_syntax_and_types.md, Page 1 (Section: Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001] User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (Section: 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013]",
       "retrieved_documents": [
         "01_python_syntax_and_types.md",
         "04_errors_and_exceptions.md",
@@ -87,7 +87,7 @@
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.72,
+      "latency_ms": 4.45,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -101,7 +101,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "**Integers (`int`)**: Integers in Python 3 have arbitrary precision (unlimited length), limited only by the available machine memory. [01_python_syntax_and_types.md, Page 1 (§ 2. Variables and Dynamic Typing) | Chunk doc_00bde289297e_p1_c006] Values can be any arbitrary Python object. [02_data_structures.md, Page 1 (§ 4. Dictionaries (`dict`)) | Chunk doc_13801f4030be_p1_c012] Numeric Types\nPython has three built-in numeric types:\n1. [01_python_syntax_and_types.md, Page 1 (§ 2. Variables and Dynamic Typing) | Chunk doc_00bde289297e_p1_c006]",
+      "actual_answer": "**Integers (`int`)**: Integers in Python 3 have arbitrary precision (unlimited length), limited only by the available machine memory. [01_python_syntax_and_types.md, Page 1 (Section: 2. Variables and Dynamic Typing) | Chunk doc_00bde289297e_p1_c006]",
       "retrieved_documents": [
         "01_python_syntax_and_types.md",
         "01_python_syntax_and_types.md",
@@ -117,14 +117,13 @@
         "doc_9aa945407bc0_p1_c005"
       ],
       "citation_sources": [
-        "01_python_syntax_and_types.md",
-        "02_data_structures.md"
+        "01_python_syntax_and_types.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 5.13,
+      "latency_ms": 4.29,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -138,7 +137,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "- `list.sort(key=None, reverse=False)`: Sorts the items of the list in place using the Timsort algorithm. [02_data_structures.md, Page 1 (§ Key List Operations and Methods) | Chunk doc_13801f4030be_p1_c003] Function Definitions and Parameters\nFunctions are defined using the `def` keyword followed by the function name, a parenthesized list of parameters, and a colon:\n```python\ndef greet(name, greeting=\"Hello\"):\n    \"\"\"Return a personalized greeting message.\"\"\"\n    return f\"{greeting}, {name}!\"\n``` [03_control_flow_and_functions.md, Page 1 (§ Loop Control: `break`, `continue`, and `else` Clauses) | Chunk doc_9aa945407bc0_p1_c007] - `list.insert(i, x)`: Inserts item `x` at position `i`. [02_data_structures.md, Page 1 (§ Python Data Structures: Lists, Tuples, Sets, and Dictionaries) | Chunk doc_13801f4030be_p1_c001]",
+      "actual_answer": "- `list.sort(key=None, reverse=False)`: Sorts the items of the list in place using the Timsort algorithm. [02_data_structures.md, Page 1 (Section: Key List Operations and Methods) | Chunk doc_13801f4030be_p1_c003]",
       "retrieved_documents": [
         "02_data_structures.md",
         "02_data_structures.md",
@@ -154,15 +153,13 @@
         "doc_13801f4030be_p1_c004"
       ],
       "citation_sources": [
-        "02_data_structures.md",
-        "03_control_flow_and_functions.md",
         "02_data_structures.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 6.24,
+      "latency_ms": 5.72,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -176,7 +173,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "Note that an empty set must be created with `set()`, because `{}` creates an empty dictionary. [02_data_structures.md, Page 1 (§ 3. Sets (`set` and `frozenset`)) | Chunk doc_13801f4030be_p1_c009] Syntax and Indentation\nPython relies on whitespace indentation rather than curly brackets `{}` or keywords like `begin`/`end` to delimit code blocks. [01_python_syntax_and_types.md, Page 1 (§ Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001] The following values are considered false in boolean contexts:\n- Constants: `None` and `False`\n- Zero of any numeric type: `0`, `0.0`, `0j`\n- Empty sequences and collections: `\"\"`, `()`, `[]`, `{}`, `set()` All other values are evaluated as true. [01_python_syntax_and_types.md, Page 1 (§ 5. Booleans and Truth Value Testing) | Chunk doc_00bde289297e_p1_c012]",
+      "actual_answer": "Note that an empty set must be created with `set()`, because `{}` creates an empty dictionary. [02_data_structures.md, Page 1 (Section: 3. Sets (`set` and `frozenset`)) | Chunk doc_13801f4030be_p1_c009] Syntax and Indentation\nPython relies on whitespace indentation rather than curly brackets `{}` or keywords like `begin`/`end` to delimit code blocks. [01_python_syntax_and_types.md, Page 1 (Section: Python Syntax, Variables, and Primitive Types) | Chunk doc_00bde289297e_p1_c001]",
       "retrieved_documents": [
         "02_data_structures.md",
         "02_data_structures.md",
@@ -193,14 +190,13 @@
       ],
       "citation_sources": [
         "02_data_structures.md",
-        "01_python_syntax_and_types.md",
         "01_python_syntax_and_types.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 5.73,
+      "latency_ms": 6.01,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -214,7 +210,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Tuples are hashable if all their elements are hashable, meaning they can serve as dictionary keys or set elements, whereas lists cannot. [02_data_structures.md, Page 1 (§ 2. Tuples (`tuple`)) | Chunk doc_13801f4030be_p1_c007] Python statements end at the end of a line, although backslashes `\\` or parentheses `()` can be used for explicit or implicit line continuation across multiple lines. [01_python_syntax_and_types.md, Page 1 (§ 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c002] Values can be any arbitrary Python object. [02_data_structures.md, Page 1 (§ 4. Dictionaries (`dict`)) | Chunk doc_13801f4030be_p1_c012]",
+      "actual_answer": "Tuples are hashable if all their elements are hashable, meaning they can serve as dictionary keys or set elements, whereas lists cannot. [02_data_structures.md, Page 1 (Section: 2. Tuples (`tuple`)) | Chunk doc_13801f4030be_p1_c007] Values can be any arbitrary Python object. [02_data_structures.md, Page 1 (Section: 4. Dictionaries (`dict`)) | Chunk doc_13801f4030be_p1_c012]",
       "retrieved_documents": [
         "02_data_structures.md",
         "02_data_structures.md",
@@ -231,14 +227,13 @@
       ],
       "citation_sources": [
         "02_data_structures.md",
-        "01_python_syntax_and_types.md",
         "02_data_structures.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.93,
+      "latency_ms": 6.32,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -252,7 +247,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "- Loop `else` clause: Python loops have an optional `else` block. [03_control_flow_and_functions.md, Page 1 (§ Loop Control: `break`, `continue`, and `else` Clauses) | Chunk doc_9aa945407bc0_p1_c006] The `else` clause executes when the loop terminates through exhaustion of the iterable or when the condition becomes false, but NOT when the loop is terminated by a `break` statement. [03_control_flow_and_functions.md, Page 1 (§ Loop Control: `break`, `continue`, and `else` Clauses) | Chunk doc_9aa945407bc0_p1_c006] The `else` and `finally` Clauses\nThe `try` statement has two optional supplemental clauses:\n- **`else` clause**: Must follow all `except` clauses. [04_errors_and_exceptions.md, Page 1 (§ 3. The `else` and `finally` Clauses) | Chunk doc_fa18419de59e_p1_c006]",
+      "actual_answer": "- Loop `else` clause: Python loops have an optional `else` block. [03_control_flow_and_functions.md, Page 1 (Section: Loop Control: `break`, `continue`, and `else` Clauses) | Chunk doc_9aa945407bc0_p1_c006] The `else` clause executes when the loop terminates through exhaustion of the iterable or when the condition becomes false, but NOT when the loop is terminated by a `break` statement. [03_control_flow_and_functions.md, Page 1 (Section: Loop Control: `break`, `continue`, and `else` Clauses) | Chunk doc_9aa945407bc0_p1_c006]",
       "retrieved_documents": [
         "03_control_flow_and_functions.md",
         "03_control_flow_and_functions.md",
@@ -268,14 +263,13 @@
         "doc_ae15f339caa8_p1_c001"
       ],
       "citation_sources": [
-        "03_control_flow_and_functions.md",
-        "04_errors_and_exceptions.md"
+        "03_control_flow_and_functions.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 5.92,
+      "latency_ms": 5.73,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -289,7 +283,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Important caveat: default argument expressions are evaluated once when the function is defined, not each time the function is called. [03_control_flow_and_functions.md, Page 1 (§ Return Values) | Chunk doc_9aa945407bc0_p1_c009] When a caller omits the argument, the default is used. [03_control_flow_and_functions.md, Page 1 (§ Return Values) | Chunk doc_9aa945407bc0_p1_c009] A function without an explicit `return` statement, or with a plain `return` lacking an argument, returns `None`. [03_control_flow_and_functions.md, Page 1 (§ Return Values) | Chunk doc_9aa945407bc0_p1_c009]",
+      "actual_answer": "Important caveat: default argument expressions are evaluated once when the function is defined, not each time the function is called. [03_control_flow_and_functions.md, Page 1 (Section: Return Values) | Chunk doc_9aa945407bc0_p1_c009] Therefore, mutable default arguments (such as `def append_to(item, target=[])`) retain modifications across successive invocations. [03_control_flow_and_functions.md, Page 1 (Section: Default Argument Values) | Chunk doc_9aa945407bc0_p1_c010]",
       "retrieved_documents": [
         "03_control_flow_and_functions.md",
         "03_control_flow_and_functions.md",
@@ -305,13 +299,14 @@
         "doc_13801f4030be_p1_c013"
       ],
       "citation_sources": [
+        "03_control_flow_and_functions.md",
         "03_control_flow_and_functions.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 5.99,
+      "latency_ms": 5.63,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -325,7 +320,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "```python\ndef log_event(event_type, *args, **kwargs):\n    print(f\"Type: {event_type}, Details: {args}, Metadata: {kwargs}\")\n``` [03_control_flow_and_functions.md, Page 1 (§ Variable-Length Arguments (`*args` and `**kwargs`)) | Chunk doc_9aa945407bc0_p1_c012] Multi-line string literals enclosed in triple quotes `'''` or `\"\"\"` can also serve as documentation strings (docstrings) when placed immediately after function, class, or module definitions. [01_python_syntax_and_types.md, Page 1 (§ 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c003] The standard idiomatic solution is to use `None` as the default value:\n```python\ndef append_to(item, target=None):\n    if target is None:\n        target = []\n    target.append(item)\n    return target\n``` ### Variable-Length Arguments (`*args` and `**kwargs`)\n- `*args`: Collects extra positional arguments into a tuple. [03_control_flow_and_functions.md, Page 1 (§ Default Argument Values) | Chunk doc_9aa945407bc0_p1_c011]",
+      "actual_answer": "The standard idiomatic solution is to use `None` as the default value:\n```python\ndef append_to(item, target=None):\n    if target is None:\n        target = []\n    target.append(item)\n    return target\n``` ### Variable-Length Arguments (`*args` and `**kwargs`)\n- `*args`: Collects extra positional arguments into a tuple. [03_control_flow_and_functions.md, Page 1 (Section: Default Argument Values) | Chunk doc_9aa945407bc0_p1_c011] ```python\ndef log_event(event_type, *args, **kwargs):\n    print(f\"Type: {event_type}, Details: {args}, Metadata: {kwargs}\")\n``` ### Anonymous Functions: Lambda Expressions\nSmall anonymous functions can be created using the `lambda` keyword:\n```python\nsquare = lambda x: x * x\n```\nLambda expressions are syntactically restricted to a single expression and cannot contain complex statements or annotations. [03_control_flow_and_functions.md, Page 1 (Section: Variable-Length Arguments (`*args` and `**kwargs`)) | Chunk doc_9aa945407bc0_p1_c013] Multi-line string literals enclosed in triple quotes `'''` or `\"\"\"` can also serve as documentation strings (docstrings) when placed immediately after function, class, or module definitions. [01_python_syntax_and_types.md, Page 1 (Section: 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c003]",
       "retrieved_documents": [
         "03_control_flow_and_functions.md",
         "03_control_flow_and_functions.md",
@@ -342,14 +337,14 @@
       ],
       "citation_sources": [
         "03_control_flow_and_functions.md",
-        "01_python_syntax_and_types.md",
-        "03_control_flow_and_functions.md"
+        "03_control_flow_and_functions.md",
+        "01_python_syntax_and_types.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 5.05,
+      "latency_ms": 4.25,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -363,7 +358,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Syntax Errors vs Exceptions\nPython distinguishes between two primary categories of errors:\n1. [04_errors_and_exceptions.md, Page 1 (§ Python Errors and Exception Handling) | Chunk doc_fa18419de59e_p1_c001] **Syntax Errors (Parsing Errors)**: Detected by the Python parser before code execution begins when code violates grammatical rules. [04_errors_and_exceptions.md, Page 1 (§ Python Errors and Exception Handling) | Chunk doc_fa18419de59e_p1_c001] **Exceptions**: Errors detected during execution. [04_errors_and_exceptions.md, Page 1 (§ Python Errors and Exception Handling) | Chunk doc_fa18419de59e_p1_c001]",
+      "actual_answer": "Syntax Errors vs Exceptions\nPython distinguishes between two primary categories of errors:\n1. [04_errors_and_exceptions.md, Page 1 (Section: Python Errors and Exception Handling) | Chunk doc_fa18419de59e_p1_c001]",
       "retrieved_documents": [
         "04_errors_and_exceptions.md",
         "04_errors_and_exceptions.md",
@@ -385,7 +380,7 @@
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.17,
+      "latency_ms": 4.1,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -399,7 +394,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "It is useful for code that should run only if the protected operation succeeded:\n```python\ntry:\n    f = open(\"results.csv\", \"r\")\nexcept OSError:\n    print(\"Cannot open file\")\nelse:\n    print(f\"File has {len(f.readlines())} lines\")\n    f.close()\n```\n- **`finally` clause**: Placed at the very end of the construct. [04_errors_and_exceptions.md, Page 1 (§ 3. The `else` and `finally` Clauses) | Chunk doc_fa18419de59e_p1_c009] The `else` and `finally` Clauses\nThe `try` statement has two optional supplemental clauses:\n- **`else` clause**: Must follow all `except` clauses. [04_errors_and_exceptions.md, Page 1 (§ 3. The `else` and `finally` Clauses) | Chunk doc_fa18419de59e_p1_c006] Bytecode Compilation\nWhen a Python script is executed, the CPython reference interpreter does not execute raw source\ncode directly. [06_python_memory_and_execution.pdf, Page 1 (§ Bytecode Compilation) | Chunk doc_ae15f339caa8_p1_c001]",
+      "actual_answer": "It is useful for code that should run only if the protected operation succeeded:\n```python\ntry:\n    f = open(\"results.csv\", \"r\")\nexcept OSError:\n    print(\"Cannot open file\")\nelse:\n    print(f\"File has {len(f.readlines())} lines\")\n    f.close()\n```\n- **`finally` clause**: Placed at the very end of the construct. [04_errors_and_exceptions.md, Page 1 (Section: 3. The `else` and `finally` Clauses) | Chunk doc_fa18419de59e_p1_c009] The `finally` block executes under all circumstances, whether an exception occurred, was handled, was re-raised, or if a `return`, `break`, or `continue` statement was encountered. [04_errors_and_exceptions.md, Page 1 (Section: 3. The `else` and `finally` Clauses) | Chunk doc_fa18419de59e_p1_c009] Bytecode Compilation\nWhen a Python script is executed, the CPython reference interpreter does not execute raw source\ncode directly. [06_python_memory_and_execution.pdf, Page 1 (Section: Bytecode Compilation) | Chunk doc_ae15f339caa8_p1_c001]",
       "retrieved_documents": [
         "04_errors_and_exceptions.md",
         "04_errors_and_exceptions.md",
@@ -416,14 +411,13 @@
       ],
       "citation_sources": [
         "04_errors_and_exceptions.md",
-        "04_errors_and_exceptions.md",
         "06_python_memory_and_execution.pdf"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 6.38,
+      "latency_ms": 5.62,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -437,7 +431,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (§ 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013] Handling Exceptions (`try ... [04_errors_and_exceptions.md, Page 1 (§ 1. Syntax Errors vs Exceptions) | Chunk doc_fa18419de59e_p1_c002] **Exceptions**: Errors detected during execution. [04_errors_and_exceptions.md, Page 1 (§ 1. Syntax Errors vs Exceptions) | Chunk doc_fa18419de59e_p1_c002]",
+      "actual_answer": "User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (Section: 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013]",
       "retrieved_documents": [
         "04_errors_and_exceptions.md",
         "05_modules_and_packages.md",
@@ -453,14 +447,13 @@
         "doc_fa18419de59e_p1_c005"
       ],
       "citation_sources": [
-        "04_errors_and_exceptions.md",
         "04_errors_and_exceptions.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.44,
+      "latency_ms": 5.08,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -474,7 +467,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Within a module, the global variable `__name__` holds the module's name as a string. [05_modules_and_packages.md, Page 1 (§ Python Modules, Packages, and Environments) | Chunk doc_82af60f11594_p1_c001] The special variable `__all__` in `__init__.py` is a list of string module names that specifies which symbols are exported when `from package import *` is executed. [05_modules_and_packages.md, Page 1 (§ 2. Packages) | Chunk doc_82af60f11594_p1_c008] The file name is the module name with the suffix `.py` appended. [05_modules_and_packages.md, Page 1 (§ Python Modules, Packages, and Environments) | Chunk doc_82af60f11594_p1_c001]",
+      "actual_answer": "Within a module, the global variable `__name__` holds the module's name as a string. [05_modules_and_packages.md, Page 1 (Section: Python Modules, Packages, and Environments) | Chunk doc_82af60f11594_p1_c001]",
       "retrieved_documents": [
         "05_modules_and_packages.md",
         "01_python_syntax_and_types.md",
@@ -490,14 +483,13 @@
         "doc_82af60f11594_p1_c008"
       ],
       "citation_sources": [
-        "05_modules_and_packages.md",
         "05_modules_and_packages.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 3.81,
+      "latency_ms": 4.18,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -511,7 +503,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "Reference Counting\nIn CPython, the primary memory management mechanism is reference counting. [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c001] Python Memory Management and Garbage Collection\nSource URL: https://docs.python.org/3/c-api/memory.html\nLicense: Python Software Foundation License (PSFL)\n3. [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c001] A variable name is merely a reference to an object in memory. [01_python_syntax_and_types.md, Page 1 (§ 2. Variables and Dynamic Typing) | Chunk doc_00bde289297e_p1_c004]",
+      "actual_answer": "Reference Counting\nIn CPython, the primary memory management mechanism is reference counting. [06_python_memory_and_execution.pdf, Page 2 (Section: Reference Counting) | Chunk doc_ae15f339caa8_p2_c001]",
       "retrieved_documents": [
         "06_python_memory_and_execution.pdf",
         "01_python_syntax_and_types.md",
@@ -527,14 +519,13 @@
         "doc_ae15f339caa8_p2_c005"
       ],
       "citation_sources": [
-        "06_python_memory_and_execution.pdf",
-        "01_python_syntax_and_types.md"
+        "06_python_memory_and_execution.pdf"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 3.73,
+      "latency_ms": 5.41,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -548,7 +539,7 @@
       "expected_abstain": false,
       "actual_status": "SUPPORTED",
       "actual_abstain": false,
-      "actual_answer": "The Global Interpreter Lock (GIL)\nCPython utilizes a mutex known as the Global Interpreter Lock (GIL) to synchronize thread execution\nand protect internal interpreter state, particularly reference counts, from race conditions. [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c006] Bytecode Compilation\nWhen a Python script is executed, the CPython reference interpreter does not execute raw source\ncode directly. [06_python_memory_and_execution.pdf, Page 1 (§ Bytecode Compilation) | Chunk doc_ae15f339caa8_p1_c001] Within a module, the global variable `__name__` holds the module's name as a string. [05_modules_and_packages.md, Page 1 (§ Python Modules, Packages, and Environments) | Chunk doc_82af60f11594_p1_c001]",
+      "actual_answer": "The Global Interpreter Lock (GIL)\nCPython utilizes a mutex known as the Global Interpreter Lock (GIL) to synchronize thread execution\nand protect internal interpreter state, particularly reference counts, from race conditions. [06_python_memory_and_execution.pdf, Page 2 (Section: Reference Counting) | Chunk doc_ae15f339caa8_p2_c006]",
       "retrieved_documents": [
         "06_python_memory_and_execution.pdf",
         "06_python_memory_and_execution.pdf",
@@ -564,15 +555,13 @@
         "doc_82af60f11594_p1_c001"
       ],
       "citation_sources": [
-        "06_python_memory_and_execution.pdf",
-        "06_python_memory_and_execution.pdf",
-        "05_modules_and_packages.md"
+        "06_python_memory_and_execution.pdf"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 3.64,
+      "latency_ms": 5.23,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": true,
@@ -606,7 +595,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.36,
+      "latency_ms": 3.05,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -640,7 +629,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.35,
+      "latency_ms": 3.57,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -674,7 +663,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.47,
+      "latency_ms": 5.6,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -708,7 +697,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 4.02,
+      "latency_ms": 5.42,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -742,7 +731,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.37,
+      "latency_ms": 6.87,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -776,7 +765,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.19,
+      "latency_ms": 4.79,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -810,7 +799,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.04,
+      "latency_ms": 4.24,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -844,7 +833,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.12,
+      "latency_ms": 3.3,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -878,7 +867,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.17,
+      "latency_ms": 3.27,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -912,7 +901,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 4.21,
+      "latency_ms": 3.88,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -946,7 +935,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 5.23,
+      "latency_ms": 4.53,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -980,7 +969,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 7.14,
+      "latency_ms": 4.84,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -1014,7 +1003,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 7.42,
+      "latency_ms": 5.52,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -1036,7 +1025,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 1.79,
+      "latency_ms": 1.77,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -1070,7 +1059,7 @@
       "recall_at_3": false,
       "recall_at_5": false,
       "reciprocal_rank": 0.0,
-      "latency_ms": 3.6,
+      "latency_ms": 4.22,
       "is_correct_abstention": true,
       "is_false_answer": false,
       "is_supported": false,
@@ -1084,7 +1073,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "**Complex numbers (`complex`)**: Written in the form `real + imag*j`, where `j` represents the imaginary unit. [01_python_syntax_and_types.md, Page 1 (§ 3. Numeric Types) | Chunk doc_00bde289297e_p1_c007] Values can be any arbitrary Python object. [02_data_structures.md, Page 1 (§ 4. Dictionaries (`dict`)) | Chunk doc_13801f4030be_p1_c012] In Python 3.7+, dictionaries are guaranteed to maintain insertion order. [02_data_structures.md, Page 1 (§ 4. Dictionaries (`dict`)) | Chunk doc_13801f4030be_p1_c012]",
+      "actual_answer": "**Complex numbers (`complex`)**: Written in the form `real + imag*j`, where `j` represents the imaginary unit. [01_python_syntax_and_types.md, Page 1 (Section: 3. Numeric Types) | Chunk doc_00bde289297e_p1_c007]",
       "retrieved_documents": [
         "01_python_syntax_and_types.md",
         "01_python_syntax_and_types.md",
@@ -1100,14 +1089,13 @@
         "doc_00bde289297e_p1_c004"
       ],
       "citation_sources": [
-        "01_python_syntax_and_types.md",
-        "02_data_structures.md"
+        "01_python_syntax_and_types.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 11.05,
+      "latency_ms": 5.31,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -1121,7 +1109,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "Lists are declared using square brackets `[]` or the `list()` constructor. [02_data_structures.md, Page 1 (§ Python Data Structures: Lists, Tuples, Sets, and Dictionaries) | Chunk doc_13801f4030be_p1_c001] A variable name is merely a reference to an object in memory. [01_python_syntax_and_types.md, Page 1 (§ 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c003] Lists (`list`)\nA list is an ordered, mutable sequence of arbitrary objects. [02_data_structures.md, Page 1 (§ Python Data Structures: Lists, Tuples, Sets, and Dictionaries) | Chunk doc_13801f4030be_p1_c001]",
+      "actual_answer": "- `list.extend(iterable)`: Extends the list by appending all items from the iterable. [02_data_structures.md, Page 1 (Section: Python Data Structures: Lists, Tuples, Sets, and Dictionaries) | Chunk doc_13801f4030be_p1_c001] A variable name is merely a reference to an object in memory. [01_python_syntax_and_types.md, Page 1 (Section: 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c003] Comments in Python start with the hash character `#` and extend to the physical end of the line. [01_python_syntax_and_types.md, Page 1 (Section: 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c002]",
       "retrieved_documents": [
         "01_python_syntax_and_types.md",
         "02_data_structures.md",
@@ -1138,13 +1126,14 @@
       ],
       "citation_sources": [
         "02_data_structures.md",
+        "01_python_syntax_and_types.md",
         "01_python_syntax_and_types.md"
       ],
       "recall_at_1": false,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 0.5,
-      "latency_ms": 8.52,
+      "latency_ms": 7.24,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -1158,7 +1147,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (§ 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013] Raising Exceptions (`raise`)\nThe `raise` statement allows a programmer to force a specified exception to occur:\n```python\nif amount < 0:\n    raise ValueError(\"Amount cannot be negative\")\n```\nCalling `raise` without arguments inside an `except` block re-raises the active exception. [04_errors_and_exceptions.md, Page 1 (§ 4. Raising Exceptions (`raise`)) | Chunk doc_fa18419de59e_p1_c012] Multi-line string literals enclosed in triple quotes `'''` or `\"\"\"` can also serve as documentation strings (docstrings) when placed immediately after function, class, or module definitions. [01_python_syntax_and_types.md, Page 1 (§ 1. Syntax and Indentation) | Chunk doc_00bde289297e_p1_c003]",
+      "actual_answer": "User-Defined Custom Exceptions\nPrograms may name their own exceptions by creating a new class that derives directly or indirectly from the built-in `Exception` class:\n```python\nclass InsufficientFundsError(Exception):\n    \"\"\"Raised when an account withdrawal exceeds available balance.\"\"\"\n    def __init__(self, balance, amount):\n        super().__init__(f\"Attempted to withdraw {amount} with only {balance} available\")\n        self.balance = balance\n        self.amount = amount\n```\nCustom exceptions should always inherit from `Exception`, not `BaseException`, to ensure they can be caught by standard `except Exception:` blocks without intercepting system-exiting exceptions like `KeyboardInterrupt` or `SystemExit`. [04_errors_and_exceptions.md, Page 1 (Section: 5. User-Defined Custom Exceptions) | Chunk doc_fa18419de59e_p1_c013]",
       "retrieved_documents": [
         "04_errors_and_exceptions.md",
         "04_errors_and_exceptions.md",
@@ -1174,15 +1163,13 @@
         "doc_ae15f339caa8_p2_c006"
       ],
       "citation_sources": [
-        "04_errors_and_exceptions.md",
-        "04_errors_and_exceptions.md",
-        "01_python_syntax_and_types.md"
+        "04_errors_and_exceptions.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 4.28,
+      "latency_ms": 5.8,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -1196,7 +1183,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "The standard `venv` module creates lightweight, isolated virtual environments with their own site-packages directory and Python interpreter:\n```bash\npython -m venv myenv\n```\nActivating a virtual environment updates the shell's `PATH` to prioritize the environment's Python binary and site-packages, preventing conflicts between project dependencies. [05_modules_and_packages.md, Page 1 (§ 5. Virtual Environments (`venv`)) | Chunk doc_82af60f11594_p1_c012] Virtual Environments (`venv`)\nPython applications often require different versions of packages. [05_modules_and_packages.md, Page 1 (§ 5. Virtual Environments (`venv`)) | Chunk doc_82af60f11594_p1_c012] Note that an empty set must be created with `set()`, because `{}` creates an empty dictionary. [02_data_structures.md, Page 1 (§ 3. Sets (`set` and `frozenset`)) | Chunk doc_13801f4030be_p1_c009]",
+      "actual_answer": "The standard `venv` module creates lightweight, isolated virtual environments with their own site-packages directory and Python interpreter:\n```bash\npython -m venv myenv\n```\nActivating a virtual environment updates the shell's `PATH` to prioritize the environment's Python binary and site-packages, preventing conflicts between project dependencies. [05_modules_and_packages.md, Page 1 (Section: 5. Virtual Environments (`venv`)) | Chunk doc_82af60f11594_p1_c012] Virtual Environments (`venv`)\nPython applications often require different versions of packages. [05_modules_and_packages.md, Page 1 (Section: 5. Virtual Environments (`venv`)) | Chunk doc_82af60f11594_p1_c012]",
       "retrieved_documents": [
         "05_modules_and_packages.md",
         "05_modules_and_packages.md",
@@ -1212,14 +1199,13 @@
         "doc_13801f4030be_p1_c008"
       ],
       "citation_sources": [
-        "05_modules_and_packages.md",
-        "02_data_structures.md"
+        "05_modules_and_packages.md"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 3.99,
+      "latency_ms": 5.55,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
@@ -1233,7 +1219,7 @@
       "expected_abstain": false,
       "actual_status": "PARTIAL_EVIDENCE",
       "actual_abstain": false,
-      "actual_answer": "To handle reference cycles, CPython incorporates a generational cyclic garbage collector (gc module). [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c005] The garbage collector classifies objects into three generations (Generation 0, 1, and 2) based on how\nmany collection cycles they survive. [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c005] Python Memory Management and Garbage Collection\nSource URL: https://docs.python.org/3/c-api/memory.html\nLicense: Python Software Foundation License (PSFL)\n3. [06_python_memory_and_execution.pdf, Page 2 (§ Reference Counting) | Chunk doc_ae15f339caa8_p2_c001]",
+      "actual_answer": "To handle reference cycles, CPython incorporates a generational cyclic garbage collector (gc module). [06_python_memory_and_execution.pdf, Page 2 (Section: Reference Counting) | Chunk doc_ae15f339caa8_p2_c005] The garbage collector classifies objects into three generations (Generation 0, 1, and 2) based on how\nmany collection cycles they survive. [06_python_memory_and_execution.pdf, Page 2 (Section: Reference Counting) | Chunk doc_ae15f339caa8_p2_c005]",
       "retrieved_documents": [
         "06_python_memory_and_execution.pdf",
         "06_python_memory_and_execution.pdf",
@@ -1249,18 +1235,87 @@
         "doc_00bde289297e_p1_c004"
       ],
       "citation_sources": [
-        "06_python_memory_and_execution.pdf",
         "06_python_memory_and_execution.pdf"
       ],
       "recall_at_1": true,
       "recall_at_3": true,
       "recall_at_5": true,
       "reciprocal_rank": 1.0,
-      "latency_ms": 3.96,
+      "latency_ms": 6.03,
       "is_correct_abstention": false,
       "is_false_answer": false,
       "is_supported": false,
       "notes": "CPython cyclic garbage collector is supported, but PyPy integer threshold is unsupported."
+    },
+    {
+      "query_id": "q16",
+      "category": "answerable",
+      "question": "Which sorting algorithm is used by Python to sort lists in place?",
+      "expected_document": "02_data_structures.md",
+      "expected_abstain": false,
+      "actual_status": "SUPPORTED",
+      "actual_abstain": false,
+      "actual_answer": "- `list.sort(key=None, reverse=False)`: Sorts the items of the list in place using the Timsort algorithm. [02_data_structures.md, Page 1 (Section: Key List Operations and Methods) | Chunk doc_13801f4030be_p1_c003]",
+      "retrieved_documents": [
+        "02_data_structures.md",
+        "02_data_structures.md",
+        "05_modules_and_packages.md",
+        "02_data_structures.md",
+        "01_python_syntax_and_types.md"
+      ],
+      "retrieved_chunk_ids": [
+        "doc_13801f4030be_p1_c003",
+        "doc_13801f4030be_p1_c001",
+        "doc_82af60f11594_p1_c007",
+        "doc_13801f4030be_p1_c004",
+        "doc_00bde289297e_p1_c006"
+      ],
+      "citation_sources": [
+        "02_data_structures.md"
+      ],
+      "recall_at_1": true,
+      "recall_at_3": true,
+      "recall_at_5": true,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 5.17,
+      "is_correct_abstention": false,
+      "is_false_answer": false,
+      "is_supported": true,
+      "notes": "Paraphrased question for list.sort() Timsort implementation."
+    },
+    {
+      "query_id": "u16",
+      "category": "unsupported",
+      "question": "What is the default TCP socket port for Python list sorting?",
+      "expected_document": null,
+      "expected_abstain": true,
+      "actual_status": "UNSUPPORTED",
+      "actual_abstain": true,
+      "actual_answer": "Information not found in provided document.",
+      "retrieved_documents": [
+        "03_control_flow_and_functions.md",
+        "03_control_flow_and_functions.md",
+        "05_modules_and_packages.md",
+        "03_control_flow_and_functions.md",
+        "02_data_structures.md"
+      ],
+      "retrieved_chunk_ids": [
+        "doc_9aa945407bc0_p1_c009",
+        "doc_9aa945407bc0_p1_c010",
+        "doc_82af60f11594_p1_c009",
+        "doc_9aa945407bc0_p1_c011",
+        "doc_13801f4030be_p1_c013"
+      ],
+      "citation_sources": [],
+      "recall_at_1": false,
+      "recall_at_3": false,
+      "recall_at_5": false,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 3.59,
+      "is_correct_abstention": true,
+      "is_false_answer": false,
+      "is_supported": false,
+      "notes": "Same-term distractor: contains Python and list sorting, but asks for absent networking concept."
     }
   ]
 }

@@ -23,6 +23,7 @@ class Citation:
     section: str
     snippet: str
     score: float
+    passage_text: str = ""
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_formatted_citation(self) -> str:
@@ -45,6 +46,7 @@ def create_citation_from_retrieval(result: RetrievalResult, snippet: Optional[st
         section=result.section,
         snippet=chosen_snippet.strip(),
         score=result.score,
+        passage_text=result.text,
         metadata=result.citation_metadata,
     )
 

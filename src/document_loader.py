@@ -37,6 +37,11 @@ class EmptyDocumentError(DocumentLoaderError):
     pass
 
 
+class EncryptedDocumentError(DocumentLoaderError):
+    """Raised when a document is encrypted or password-protected."""
+    pass
+
+
 class OcrRequiredError(EmptyDocumentError):
     """Raised when a PDF has pages but no extractable text (scanned / image-only)."""
     pass
@@ -194,6 +199,11 @@ def load_pdf(file_path: Path, sanitized_name: str) -> Document:
         raise DocumentExtractionError(f"Failed to open PDF (corrupted or unreadable format): {e}")
 
     try:
+        if getattr(doc, "is_encrypted", False):
+            raise EncryptedDocumentError(
+                f"PDF '{file_path.name}' is encrypted or password-protected and cannot be parsed without credentials."
+            )
+
         total_pages = len(doc)
         if total_pages == 0:
             raise EmptyDocumentError(f"PDF contains 0 pages: {file_path.name}")
